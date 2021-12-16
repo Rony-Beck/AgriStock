@@ -1,23 +1,15 @@
 ﻿using AgriStockApp.Scripts;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AgriStockApp.Pages
 {
@@ -30,10 +22,6 @@ namespace AgriStockApp.Pages
         public string Game { get; set; }
         public ImageSource GameImg { get; set; }
 
-        //Display Area
-        TextBlock ModName;
-        Grid MotherGrid;
-
         //Ctor
         public ServerStats_Mods(string xmlData)
         {
@@ -43,10 +31,15 @@ namespace AgriStockApp.Pages
         }
 
         //Functions
+        //Load & Display Modslist
         internal async void LoadList(string xmlData)
         {
             if (xmlData == "error") { return; }
             dynamic serverData = await Task.Run(() => JsonConvert.DeserializeObject(xmlData));
+            
+            //*************************************
+            //Add Automatic game detector api based
+            //*************************************
             Game = "fs22";
 
             if (Game == "fs22")
@@ -55,22 +48,22 @@ namespace AgriStockApp.Pages
                 GameImg = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "Assets\\Img\\fs22.png", UriKind.Absolute));
             }
             
+            //Get Local Mods List
             ModPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\" + GameFolder + "\\mods";
-            
             if (!Directory.Exists(ModPath))
             {
                 Directory.CreateDirectory(ModPath);
             }
             string[] localMods = Directory.GetFiles(ModPath);
 
+            //Foreach Serverside Mod
             foreach (var mod in serverData.mods)
             {
-                //Debug.WriteLine((string)mod.name + ".zip");
-                
                 //Construction de la Grid mère
-                MotherGrid = new Grid();
+                Grid MotherGrid = new Grid();
                 MotherGrid.Height = 75;
                 modsList_Zone.Children.Add(MotherGrid);
+                
                 //Ajout des colonnes
                 ColumnDefinition MGrid_Gauche = new ColumnDefinition();
                 ColumnDefinition MGrid_Centre = new ColumnDefinition();
@@ -87,7 +80,7 @@ namespace AgriStockApp.Pages
                 Details.Name = (string)mod.name;
                 Grid.SetColumn(Details, 1);
                 //ModName
-                ModName = new TextBlock();
+                TextBlock ModName = new TextBlock();
                 Details.Children.Add(ModName);
                 ModName.Text = mod.name + ".zip";
                 ModName.Foreground = Brushes.White;
@@ -119,22 +112,23 @@ namespace AgriStockApp.Pages
                 ModImg.Source = GameImg;
                 Grid.SetColumn(ModImg, 0);
 
+                //Search Local Copy
                 foreach (var item in localMods)
                 {
-                    //Debug.WriteLine(System.IO.Path.GetFileName(item));
                     if (System.IO.Path.GetFileName(item) == (string)mod.name + ".zip")
                     {
-                        //string modsHash = CalculateMD5(@System.IO.Path.Combine(ModPath, System.IO.Path.GetFileName(item)));
+                        //HashChecker
+                        string modsHash = CalculateMD5(@System.IO.Path.Combine(ModPath, System.IO.Path.GetFileName(item)));
 
-                        //Debug.WriteLine(EasyMD5.Hash(System.IO.Path.GetFileName(item) + modsHash));
-                        
-                        //if (modsHash != (string)mod.hash)
-                        //{
-                        //    Manage.Content = (string)Application.Current.FindResource("update");
-                        //    Manage.ToolTip = (string)Application.Current.FindResource("update") + " " + (string)mod.name;
-                        //    Manage.Background = Brushes.SkyBlue;
-                        //    break;
-                        //}
+                        Debug.WriteLine(">> Hash: " + modsHash);
+
+                        if (modsHash != (string)mod.hash)
+                        {
+                            Manage.Content = (string)Application.Current.FindResource("update");
+                            Manage.ToolTip = (string)Application.Current.FindResource("update") + " " + (string)mod.name;
+                            Manage.Background = Brushes.SkyBlue;
+                            break;
+                        }
 
                         Manage.Content = (string)Application.Current.FindResource("remove");
                         Manage.ToolTip = (string)Application.Current.FindResource("remove") + " " + (string)mod.name;
@@ -173,8 +167,6 @@ namespace AgriStockApp.Pages
                     return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
                 }
             }
-
-            //return EasyMD5.Hash(File.OpenRead(filename));
         }
 
         //Boutons
@@ -191,7 +183,6 @@ namespace AgriStockApp.Pages
             source.IsEnabled = false;
             source.Content = (string)Application.Current.FindResource("wait");
 
-            //Debug.WriteLine(WebModsPath);
             try
             {
                 await DownloadFileAsync(WebModsPath, System.IO.Path.Combine(ModPath, pModeName.Text));
@@ -209,7 +200,6 @@ namespace AgriStockApp.Pages
                 Debug.WriteLine(ex);
             }
             source.IsEnabled = true;
-            Debug.WriteLine("AddMod Clicked");
         }
 
         //Retirer un mod
@@ -220,6 +210,8 @@ namespace AgriStockApp.Pages
             StackPanel pDetails = pGrid.Children[0] as StackPanel;
             TextBlock pModeName = pDetails.Children[0] as TextBlock;
 
+            source.IsEnabled = false;
+
             try {
                 File.Delete(System.IO.Path.Combine(ModPath, pModeName.Text));
                 source.Click += AddMod;
@@ -228,13 +220,13 @@ namespace AgriStockApp.Pages
                 source.Content = (string)Application.Current.FindResource("downLoad");
                 source.ToolTip = (string)Application.Current.FindResource("downLoad") + " " + pModeName.Text;
                 source.Background = new SolidColorBrush(Color.FromRgb(0, 151, 68));
-
-                Debug.WriteLine(pModeName.Text + " deleted");
             }
             catch
             {
                 Debug.WriteLine(pModeName.Text + " not deleted");
             }
+
+            source.IsEnabled = true;
         }
     }
 }

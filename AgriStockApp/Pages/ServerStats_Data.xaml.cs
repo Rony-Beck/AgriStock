@@ -29,6 +29,7 @@ namespace AgriStockApp.Pages
         }
 
         //Functions
+        //Read & Display datas
         internal async void Read_Data(string xmlData)
         {
             if (xmlData == "error") { dataBox.Text = "Error!"; return; }
@@ -38,6 +39,7 @@ namespace AgriStockApp.Pages
             Debug.WriteLine(">>>> ServerStats_Data Displayed...");
         }
 
+        //Refresh datas
         internal async void RefreshXml()
         {
             Debug.WriteLine(">>>> Refreshing ServerStats_Data...");

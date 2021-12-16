@@ -39,6 +39,7 @@ namespace AgriStockApp.Pages
         }
 
         //Fonctions
+        //Read & Display datas
         internal void ReadDatas(string xmlData)
         {
             Debug.WriteLine(">> Processing ServerStats...");
@@ -85,6 +86,7 @@ namespace AgriStockApp.Pages
             Fill_Players_List(serverData.slots.players);
         }
 
+        //Refresh datas
         internal async void RefreshXml()
         {
             Debug.WriteLine(">> Refreshing ServerStats...");
@@ -94,6 +96,7 @@ namespace AgriStockApp.Pages
             notifBar.MessageQueue.Enqueue((string)Application.Current.FindResource("refreshedDatas"));
         }
 
+        //Activate buttons
         internal void Menu_Is_Active(bool trueFalse)
         {
             Overview_Button.IsEnabled = trueFalse;
@@ -102,6 +105,7 @@ namespace AgriStockApp.Pages
             Mods_Button.IsEnabled = trueFalse;
         }
 
+        //Display Playerlist
         internal void Fill_Players_List(dynamic serverData)
         {
             player.Clear();
@@ -170,6 +174,7 @@ namespace AgriStockApp.Pages
         }
 
         //Buttons
+        //Refresh datas
         private void serverRefresh_Click(object sender, RoutedEventArgs e)
         {
             //notifBar.MessageQueue.Enqueue((string)Application.Current.FindResource("requestingDatas"));
@@ -177,24 +182,28 @@ namespace AgriStockApp.Pages
             RefreshXml();
         }
 
+        //Access Overview page
         private void Overview_Button_Click(object sender, RoutedEventArgs e)
         {
             statsPageHolder.DataContext = new ServerStats_Overview(XMLData);
             NavFrom = "ServerStats_Overview";
         }
 
+        //Access Map page
         private void Map_Button_Click(object sender, RoutedEventArgs e)
         {
             statsPageHolder.DataContext = new ServerStats_Map(XMLData);
             NavFrom = "ServerStats_Map";
         }
 
+        //Access Rawdatas page
         private void Data_Button_Click(object sender, RoutedEventArgs e)
         {
             statsPageHolder.DataContext = new ServerStats_Data(XMLData);
             NavFrom = "ServerStats_Data";
         }
 
+        //Access Mods page
         private void Mods_Button_Click(object sender, RoutedEventArgs e)
         {
             statsPageHolder.DataContext = new ServerStats_Mods(XMLData);

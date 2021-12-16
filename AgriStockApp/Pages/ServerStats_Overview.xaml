@@ -20,7 +20,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <!--Map Name-->
+                <!--Title-->
                 <TextBlock Text="{DynamicResource overview}" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold"/>
             </Grid>
         </materialDesign:Card>

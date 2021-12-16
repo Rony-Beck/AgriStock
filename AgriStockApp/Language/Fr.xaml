@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
+
+    <!--Fr lang dictionary-->
+    
+    
     <!--Mots-->
     <system:String x:Key="downLoad">Télécharger</system:String>
     <system:String x:Key="emptySlot">Emplacement libre</system:String>

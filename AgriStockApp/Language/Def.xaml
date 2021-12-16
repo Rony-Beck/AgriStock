@@ -1,7 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-
+    
+    
+    <!--En lang dictionary-->
+    
+    
     <!--Words-->
     <system:String x:Key="downLoad">Download</system:String>
     <system:String x:Key="emptySlot">Slot empty</system:String>

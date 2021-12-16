@@ -35,6 +35,7 @@
             <ContentControl x:Name="statsPageHolder" Content="{Binding}"/>
         </materialDesign:Card>
 
+        <!--Notifications-->
         <materialDesign:Snackbar x:Name="notifBar" MessageQueue="{materialDesign:MessageQueue}" Grid.Row="1" Grid.ColumnSpan="2" Background="{DynamicResource MaterialDesignLightForeground}" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" BorderThickness="0,2,0,0" HorizontalAlignment="Left"/>
 
         <!--Navigation-->

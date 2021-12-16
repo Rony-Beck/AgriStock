@@ -16,15 +16,7 @@
         </Style>
     </Window.Resources>
     <Grid>
+        <!--Page Holder-->
         <ContentControl x:Name="pageHolder" Content="{Binding}" Margin="10,10,10,10"/>
-        <!--<Button x:Name="menuButton" ToolTip="Open/Close menu" BorderBrush="{x:Null}" Background="#FFB66B00" Padding="4,4,4,4" Margin="20,24,0,0" VerticalAlignment="Top" Height="24" Click="menu_Click" Cursor="Hand" Width="24" HorizontalAlignment="Left" Visibility="Collapsed">
-            <materialDesign:PackIcon Kind="Menu" />
-        </Button>
-        <materialDesign:Card x:Name="menuMain" Background="{DynamicResource MaterialDesignShadowBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Grid.ColumnSpan="1" Margin="50,28,0,0" Grid.Row="1" Grid.Column="2" Width="130" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed">
-            <StackPanel>
-                <TextBlock Text="Main Menu" FontSize="18" FontWeight="Bold" Margin="0,0,0,6" FontStyle="Italic"/>
-                <Button x:Name="servStatsButton" Content="Server Stats" Background="#FF0B5D6A" BorderBrush="{x:Null}" Padding="4,4,4,4" Click="servStatsButton_Click"/>
-            </StackPanel>
-        </materialDesign:Card>-->
     </Grid>
 </Window>
