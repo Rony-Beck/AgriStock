@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using RestSharp;
+﻿using RestSharp;
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -63,13 +62,9 @@ namespace AgriStockApp.Scripts
 
                 hashResult = BitConverter.ToString(hashAlg.Hash).Replace("-", "").ToLowerInvariant();
             }
-            catch (IOException ex)
+            catch
             {
-                Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "IntegrityCheck");
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "IntegrityCheck");
+                hashResult = "0x";
             }
             finally
             {
