@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!--Words-->
+    <system:String x:Key="downLoad">Download</system:String>
+    <system:String x:Key="emptySlot">Slot empty</system:String>
+    <system:String x:Key="farmLands">Farmlands:</system:String>
+    <system:String x:Key="fields">Fields:</system:String>
+    <system:String x:Key="loading">Loading...</system:String>
+    <system:String x:Key="map">Map</system:String>
+    <system:String x:Key="mapName">Map name</system:String>
+    <system:String x:Key="mapSize">Map size:</system:String>
+    <system:String x:Key="modManager">Mods manager</system:String>
+    <system:String x:Key="navigation">Navigation</system:String>
+    <system:String x:Key="overview">Overview</system:String>
+    <system:String x:Key="players">Players</system:String>
+    <system:String x:Key="rawDatas">Raw datas</system:String>
+    <system:String x:Key="refresh">Refresh</system:String>
+    <system:String x:Key="refreshedDatas">Datas updated</system:String>
+    <system:String x:Key="remove">Remove</system:String>
+    <system:String x:Key="requestingDatas">Updating datas...</system:String>
+    <system:String x:Key="serverIdle">Server in idle state</system:String>
+    <system:String x:Key="serverName">Server name</system:String>
+    <system:String x:Key="serverOffline">Server offline</system:String>
+    <system:String x:Key="update">Update</system:String>
+    <system:String x:Key="uptime">Uptime:</system:String>
+    <system:String x:Key="wait">Wait...</system:String>
+
+    <!--Strings-->
+</ResourceDictionary>

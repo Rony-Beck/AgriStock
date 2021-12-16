@@ -1,0 +1,30 @@
+﻿<Window x:Class="AgriStockApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:AgriStockApp"
+        mc:Ignorable="d"
+        Background="#FF171F27"
+        TextElement.Foreground="#FFE6E6E6"
+        Title="AgriStock Data Analyst" MinHeight="600" MinWidth="1000">
+    <Window.Resources>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="#FF171F27"/>
+            <Setter Property="BorderBrush" Value="#FF171F27"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <ContentControl x:Name="pageHolder" Content="{Binding}" Margin="10,10,10,10"/>
+        <!--<Button x:Name="menuButton" ToolTip="Open/Close menu" BorderBrush="{x:Null}" Background="#FFB66B00" Padding="4,4,4,4" Margin="20,24,0,0" VerticalAlignment="Top" Height="24" Click="menu_Click" Cursor="Hand" Width="24" HorizontalAlignment="Left" Visibility="Collapsed">
+            <materialDesign:PackIcon Kind="Menu" />
+        </Button>
+        <materialDesign:Card x:Name="menuMain" Background="{DynamicResource MaterialDesignShadowBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Grid.ColumnSpan="1" Margin="50,28,0,0" Grid.Row="1" Grid.Column="2" Width="130" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed">
+            <StackPanel>
+                <TextBlock Text="Main Menu" FontSize="18" FontWeight="Bold" Margin="0,0,0,6" FontStyle="Italic"/>
+                <Button x:Name="servStatsButton" Content="Server Stats" Background="#FF0B5D6A" BorderBrush="{x:Null}" Padding="4,4,4,4" Click="servStatsButton_Click"/>
+            </StackPanel>
+        </materialDesign:Card>-->
+    </Grid>
+</Window>
