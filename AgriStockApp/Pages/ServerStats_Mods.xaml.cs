@@ -118,18 +118,18 @@ namespace AgriStockApp.Pages
                 {
                     if (System.IO.Path.GetFileName(item) == (string)mod.name + ".zip")
                     {
-                        ////HashChecker
-                        //string modsHash = CalculateMD5(@System.IO.Path.Combine(ModPath, System.IO.Path.GetFileName(item)));
+                        //HashChecker
+                        string modsHash = await Task.Run(() => CalculateMD5(@System.IO.Path.Combine(ModPath, System.IO.Path.GetFileName(item))));
 
-                        //Debug.WriteLine(">> Hash: " + modsHash);
+                        Debug.WriteLine(">> Hash: " + modsHash);
 
-                        //if (modsHash != (string)mod.hash)
-                        //{
-                        //    Manage.Content = (string)Application.Current.FindResource("update");
-                        //    Manage.ToolTip = (string)Application.Current.FindResource("update") + " " + (string)mod.name;
-                        //    Manage.Background = Brushes.SkyBlue;
-                        //    break;
-                        //}
+                        if (modsHash != (string)mod.hash)
+                        {
+                            Manage.Content = (string)Application.Current.FindResource("update");
+                            Manage.ToolTip = (string)Application.Current.FindResource("update") + " " + (string)mod.name;
+                            Manage.Background = Brushes.SkyBlue;
+                            break;
+                        }
 
                         Manage.Content = (string)Application.Current.FindResource("remove");
                         Manage.ToolTip = (string)Application.Current.FindResource("remove") + " " + (string)mod.name;
