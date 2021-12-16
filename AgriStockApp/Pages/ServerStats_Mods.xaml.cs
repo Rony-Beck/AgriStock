@@ -85,6 +85,7 @@ namespace AgriStockApp.Pages
                 ModName.Text = mod.name + ".zip";
                 ModName.Foreground = Brushes.White;
                 ModName.FontSize = 18;
+                ModName.TextWrapping = TextWrapping.WrapWithOverflow;
                 //ModAsh
                 TextBlock ModAsh = new TextBlock();
                 Details.Children.Add(ModAsh);
