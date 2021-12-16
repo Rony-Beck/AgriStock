@@ -1,4 +1,5 @@
 ﻿using AgriStockApp.Scripts;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
@@ -116,24 +117,23 @@ namespace AgriStockApp.Pages
                 //Search Local Copy
                 foreach (var item in localMods)
                 {
-                    if (System.IO.Path.GetFileName(item) == (string)mod.name + ".zip")
+                    if (Path.GetFileName(item) == (string)mod.name + ".zip")
                     {
                         //HashChecker
-                        string modsHash = await Task.Run(() => CalculateMD5(@System.IO.Path.Combine(ModPath, System.IO.Path.GetFileName(item))));
-
+                        string modsHash = await Task.Run(() => Fonctions.GetModHash(@Path.Combine(ModPath, Path.GetFileName(item))));
                         Debug.WriteLine(">> Hash: " + modsHash);
 
                         if (modsHash != (string)mod.hash)
                         {
                             Manage.Content = (string)Application.Current.FindResource("update");
                             Manage.ToolTip = (string)Application.Current.FindResource("update") + " " + (string)mod.name;
-                            Manage.Background = Brushes.SkyBlue;
+                            Manage.Background = Brushes.Violet;
                             break;
                         }
 
                         Manage.Content = (string)Application.Current.FindResource("remove");
                         Manage.ToolTip = (string)Application.Current.FindResource("remove") + " " + (string)mod.name;
-                        Manage.Background = Brushes.OrangeRed;
+                        Manage.Background = Brushes.DarkOrange;
                         Manage.Click -= AddMod;
                         Manage.Click += RemoveMod;
                         break;
@@ -155,26 +155,6 @@ namespace AgriStockApp.Pages
             await client.DownloadFileTaskAsync(new Uri(url), filePath);
         }
 
-        //Get md5
-        static string CalculateMD5(string filename)
-        {
-            try
-            {
-                using (var md5 = MD5.Create())
-                {
-                    using (var stream = File.OpenRead(filename))
-                    {
-
-                        var hash = md5.ComputeHash(stream);
-                        stream.Dispose();
-
-                        return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
-                    }
-                }
-            }
-            catch { return "00X"; }
-        }
-
         //Boutons
         //Ajouter un mod
         private async void AddMod(object sender, RoutedEventArgs e)
@@ -191,14 +171,14 @@ namespace AgriStockApp.Pages
 
             try
             {
-                await DownloadFileAsync(WebModsPath, System.IO.Path.Combine(ModPath, pModeName.Text), source);
+                await DownloadFileAsync(WebModsPath, Path.Combine(ModPath, pModeName.Text), source);
 
                 source.Click -= AddMod;
                 source.Click += RemoveMod;
 
                 source.Content = (string)Application.Current.FindResource("remove");
                 source.ToolTip = (string)Application.Current.FindResource("remove") + " " + pModeName.Text;
-                source.Background = Brushes.OrangeRed;
+                source.Background = Brushes.DarkOrange;
             }
             catch (Exception ex)
             {
@@ -219,7 +199,7 @@ namespace AgriStockApp.Pages
             source.IsEnabled = false;
 
             try {
-                File.Delete(System.IO.Path.Combine(ModPath, pModeName.Text));
+                File.Delete(Path.Combine(ModPath, pModeName.Text));
                 source.Click += AddMod;
                 source.Click -= RemoveMod;
 
