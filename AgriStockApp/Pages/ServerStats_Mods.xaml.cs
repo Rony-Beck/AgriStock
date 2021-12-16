@@ -147,26 +147,31 @@ namespace AgriStockApp.Pages
         }
         
         //Telechargement
-        private static async Task DownloadFileAsync(string url, string filePath)
+        private static async Task DownloadFileAsync(string url, string filePath, Button source)
         {
             WebClient client = new WebClient();
+            client.DownloadProgressChanged += (s, e) => { source.Content = e.ProgressPercentage + "%"; };
             await client.DownloadFileTaskAsync(new Uri(url), filePath);
         }
 
         //Get md5
         static string CalculateMD5(string filename)
         {
-            using (var md5 = MD5.Create())
+            try
             {
-                using (var stream = File.OpenRead(filename))
+                using (var md5 = MD5.Create())
                 {
+                    using (var stream = File.OpenRead(filename))
+                    {
 
-                    var hash = md5.ComputeHash(stream);
-                    stream.Dispose();
+                        var hash = md5.ComputeHash(stream);
+                        stream.Dispose();
 
-                    return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                        return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                    }
                 }
             }
+            catch { return "00X"; }
         }
 
         //Boutons
@@ -185,7 +190,7 @@ namespace AgriStockApp.Pages
 
             try
             {
-                await DownloadFileAsync(WebModsPath, System.IO.Path.Combine(ModPath, pModeName.Text));
+                await DownloadFileAsync(WebModsPath, System.IO.Path.Combine(ModPath, pModeName.Text), source);
 
                 source.Click -= AddMod;
                 source.Click += RemoveMod;
