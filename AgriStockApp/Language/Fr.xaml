@@ -7,16 +7,19 @@
     
     
     <!--Mots-->
+    <system:String x:Key="done">Terminé</system:String>
     <system:String x:Key="downLoad">Télécharger</system:String>
     <system:String x:Key="emptySlot">Emplacement libre</system:String>
     <system:String x:Key="farmLands">Domaines:</system:String>
     <system:String x:Key="fields">Champs:</system:String>
+    <system:String x:Key="installed">Installé</system:String>
     <system:String x:Key="loading">Chargement...</system:String>
     <system:String x:Key="map">Carte</system:String>
     <system:String x:Key="mapName">Nom de la carte</system:String>
     <system:String x:Key="mapSize">Taille de la carte:</system:String>
     <system:String x:Key="modManager">Mods manager</system:String>
     <system:String x:Key="navigation">Navigation</system:String>
+    <system:String x:Key="new">Nouveau</system:String>
     <system:String x:Key="overview">Vue d'ensemble</system:String>
     <system:String x:Key="players">Joueurs</system:String>
     <system:String x:Key="rawDatas">Données brutes</system:String>
@@ -24,11 +27,14 @@
     <system:String x:Key="refreshedDatas">Données à jour.</system:String>
     <system:String x:Key="remove">Retirer</system:String>
     <system:String x:Key="requestingDatas">Récupération des données...</system:String>
+    <system:String x:Key="scanning">Scan en cours</system:String>
     <system:String x:Key="serverName">Nom du serveur</system:String>
     <system:String x:Key="serverIdle">Serveur en attente</system:String>
     <system:String x:Key="serverOffline">Serveur hors-ligne</system:String>
-    <system:String x:Key="update">Mettre à jour</system:String>
+    <system:String x:Key="update">Mise à jour</system:String>
+    <system:String x:Key="updating">En cours</system:String>
     <system:String x:Key="uptime">Temps:</system:String>
+    <system:String x:Key="upToDate">A jour</system:String>
     <system:String x:Key="wait">Patientez...</system:String>
 
     <!--Phrases-->

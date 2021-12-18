@@ -9,18 +9,53 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="120"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <!--Header Zone-->
-        <materialDesign:Card Background="#FF0D141B" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="0,0,0,6">
+        <materialDesign:Card Background="#FF0D141B" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="0" UniformCornerRadius="6" Margin="0,0,0,6">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                <!--Progress Bar in header background-->
+                <ProgressBar Value="{Binding ProgressCurrent, Mode=OneWay}" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Background="#FF0D141B" Foreground="#FF16222E" Margin="0,0,0,0" Height="115"/>
                 <!--Page title-->
-                <TextBlock Text="{DynamicResource modManager}" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold"/>
+                <TextBlock Text="{DynamicResource modManager}" VerticalAlignment="Center" Grid.ColumnSpan="2" Padding="8" FontSize="20" FontWeight="Bold"/>
+                <!--Mods overview-->
+                <Grid Grid.Column="2" Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.ColumnSpan="3">
+                        <!--TotalMods-->
+                        <materialDesign:Chip x:Name="TotalCountDisplay" Content="Mods" Icon="{Binding ModsTotal, Mode=OneWay}" Background="#FF005E7A" IconBackground="#FF009CBF" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,10,0" />
+                        <!--SyncedMods-->
+                        <materialDesign:Chip x:Name="TotalSincedDisplay" Content="{DynamicResource installed}" Icon="{Binding ModsSynced, Mode=OneWay}" Background="#FF088F2D" IconBackground="#FF00CF42" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="1" Cursor="Hand" Margin="0,0,10,0" />
+                        <!--NewMods-->
+                        <materialDesign:Chip x:Name="TotalNewDisplay" Content="{DynamicResource new}" Icon="{Binding ModsNew, Mode=OneWay}" Background="#FF47A009" IconBackground="#FF53CB00" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="1" Margin="0,0,10,0" />
+                        <!--NewMods-->
+                        <materialDesign:Chip x:Name="TotalUpdateDisplay" Content="{DynamicResource update}" Icon="{Binding ModsToUpdate, Mode=OneWay}" Background="#FF8100CB" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="0" Cursor="Hand" IconBackground="#FF9E00F9" />
+                    </StackPanel>
+                    
+                    <!--SyncButton-->
+                    <Button x:Name="SyncButton" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Padding="4,10,4,10" FontSize="12" FontWeight="Bold" BorderBrush="{x:Null}" Background="#FF086681" Click="SyncButton_Click" IsEnabled="False" Margin="0,0,0,0" Grid.ColumnSpan="3" Width="180" HorizontalAlignment="Right" Cursor="Hand" Height="40" >
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <!--ProgressCircle-->
+                            <ProgressBar x:Name="ProgressCircle" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="{Binding ProgressCurrent, Mode=OneWay}" IsIndeterminate="True" Foreground="#FF03E8FF" BorderBrush="{x:Null}" Width="20" Height="20" VerticalAlignment="Center" />
+                            <materialDesign:PackIcon x:Name="SyncButtonIcon" Visibility="Collapsed" Width="20" Height="20" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="SyncButtonText" Text="{DynamicResource scanning}" Margin="10,0,0,0" FontSize="16" VerticalAlignment="Center" LineStackingStrategy="MaxHeight" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                
             </Grid>
         </materialDesign:Card>
 
