@@ -2,7 +2,7 @@
 {
     public static class FS_Api
     {
-        //Server Stats XML
+        //Server Stats JSon
         public static string Stats(string FS_Host, string FS_Key)
         {
             return FS_Host + "/feed/dedicated-server-stats.json?code=" + FS_Key;
