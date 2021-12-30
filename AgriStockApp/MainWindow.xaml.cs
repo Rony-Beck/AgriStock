@@ -7,8 +7,11 @@ namespace AgriStockApp
 {
     public partial class MainWindow : Window
     {
-        //Props
-        public string ApiResponse { get; set; }
+        //Shared Props
+        public static dynamic ServerData { get; set; }
+        public static dynamic CareerSavegame { get; set; }
+        public static dynamic EconomySavegame { get; set; }
+        public static dynamic VehiclesSavegame { get; set; }
         public static string Current_FS_Host { get; set; }
         public static string Current_FS_Key { get; set; }
 
