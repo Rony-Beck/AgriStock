@@ -7,6 +7,7 @@
     
     
     <!--Words-->
+    <system:String x:Key="created">Created</system:String>
     <system:String x:Key="done">Finished</system:String>
     <system:String x:Key="downLoad">Download</system:String>
     <system:String x:Key="emptySlot">Slot empty</system:String>
@@ -31,6 +32,7 @@
     <system:String x:Key="serverIdle">Server in idle state</system:String>
     <system:String x:Key="serverName">Server name</system:String>
     <system:String x:Key="serverOffline">Server offline</system:String>
+    <system:String x:Key="slots">Slots</system:String>
     <system:String x:Key="update">Update</system:String>
     <system:String x:Key="updating">Updating</system:String>
     <system:String x:Key="uptime">Uptime:</system:String>
