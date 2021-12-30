@@ -13,7 +13,6 @@ namespace AgriStockApp.Pages
     public partial class ServerStats : UserControl
     {
         //Props
-        public string XMLData { get; set; }
         public static string NavFrom { get; set; }
 
         //Ctor
@@ -67,7 +66,7 @@ namespace AgriStockApp.Pages
             serverName.Foreground = new SolidColorBrush(Colors.SkyBlue);
             serverPlayers.Text = serverData.slots.used + "/" + serverData.slots.capacity;
             
-            if (NavFrom == "ServerStats_Overview") { statsPageHolder.DataContext = new ServerStats_Overview(xmlData); }
+            if (NavFrom == "ServerStats_Overview") { statsPageHolder.DataContext = new ServerStats_Overview(MainWindow.CareerSavegame); }
             if (NavFrom == "ServerStats_Map") { statsPageHolder.DataContext = new ServerStats_Map(xmlData); }
             if (NavFrom == "ServerStats_Mods") { statsPageHolder.DataContext = new ServerStats_Mods(xmlData); }
             if (NavFrom == "ServerStats_Data") { statsPageHolder.DataContext = new ServerStats_Data(xmlData); }
@@ -81,8 +80,11 @@ namespace AgriStockApp.Pages
         {
             Debug.WriteLine(">> Refreshing ServerStats...");
             
-            XMLData = await Task.Run(() => Fonctions.getServerData(FS_Api.Stats(MainWindow.Current_FS_Host, MainWindow.Current_FS_Key)));
-            ReadDatas(XMLData);
+            MainWindow.CareerSavegame = await Task.Run(() => Fonctions.getServerData_XML_to_JSON(FS_Api.Career(MainWindow.Current_FS_Host, MainWindow.Current_FS_Key)));
+            MainWindow.ServerData = await Task.Run(() => Fonctions.getServerData(FS_Api.Stats(MainWindow.Current_FS_Host, MainWindow.Current_FS_Key)));
+            
+            ReadDatas(MainWindow.ServerData);
+            
             notifBar.MessageQueue.Enqueue((string)Application.Current.FindResource("refreshedDatas"));
         }
 
@@ -175,28 +177,28 @@ namespace AgriStockApp.Pages
         //Access Overview page
         private void Overview_Button_Click(object sender, RoutedEventArgs e)
         {
-            statsPageHolder.DataContext = new ServerStats_Overview(XMLData);
+            statsPageHolder.DataContext = new ServerStats_Overview(MainWindow.CareerSavegame);
             NavFrom = "ServerStats_Overview";
         }
 
         //Access Map page
         private void Map_Button_Click(object sender, RoutedEventArgs e)
         {
-            statsPageHolder.DataContext = new ServerStats_Map(XMLData);
+            statsPageHolder.DataContext = new ServerStats_Map(MainWindow.ServerData);
             NavFrom = "ServerStats_Map";
         }
 
         //Access Rawdatas page
         private void Data_Button_Click(object sender, RoutedEventArgs e)
         {
-            statsPageHolder.DataContext = new ServerStats_Data(XMLData);
+            statsPageHolder.DataContext = new ServerStats_Data(MainWindow.ServerData);
             NavFrom = "ServerStats_Data";
         }
 
         //Access Mods page
         private void Mods_Button_Click(object sender, RoutedEventArgs e)
         {
-            statsPageHolder.DataContext = new ServerStats_Mods(XMLData);
+            statsPageHolder.DataContext = new ServerStats_Mods(MainWindow.ServerData);
             NavFrom = "ServerStats_Mods";
         }
     }
