@@ -34,7 +34,7 @@ namespace AgriStockApp.Pages
         {
             if (xmlData == "error") { dataBox.Text = "Error!"; return; }
             dynamic serverData = await Task.Run(() => JsonConvert.DeserializeObject(xmlData));
-            dataBox.Text = serverData.ToString();
+            dataBox.Text = serverData.careerSavegame.settings.ToString();
 
             Debug.WriteLine(">>>> ServerStats_Data Displayed...");
         }
