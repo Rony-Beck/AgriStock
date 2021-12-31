@@ -24,6 +24,7 @@ namespace AgriStockApp.Pages
         {
             InitializeComponent();
             Debug.WriteLine(">>> Opening ServerStats_Overview...");
+            Debug.WriteLine(xmlData);
 
             if (xmlData == "off" || xmlData == "idle") { return; }
 
@@ -33,7 +34,10 @@ namespace AgriStockApp.Pages
         //Functions
         internal void SetData(dynamic json)
         {
-            //test.Text = json.server.version;
+            //dynamic serverData = JsonConvert.DeserializeObject(json);
+            dynamic data = json.careerSavegame.settings;
+            Created.Text = data.creationDate;
+            Slots.Text = json.careerSavegame.slotSystem.slotUsage;
         }
     }
 }

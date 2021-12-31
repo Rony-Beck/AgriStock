@@ -24,5 +24,26 @@
                 <TextBlock Text="{DynamicResource overview}" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold"/>
             </Grid>
         </materialDesign:Card>
+        <ScrollViewer Grid.Row="1" Grid.RowSpan="2">
+            <WrapPanel>
+                <!--Created-->
+                <materialDesign:Card Background="#FF14202C" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="200" Padding="8" UniformCornerRadius="6" Margin="0,0,5,5">
+                    <StackPanel>
+                        <TextBlock Text="{DynamicResource created}" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock x:Name="Created" Text="00/00/0000" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="22"/>
+                    </StackPanel>
+                </materialDesign:Card>
+                <!--Slots-->
+                <materialDesign:Card Background="#FF14202C" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="200" Padding="8" UniformCornerRadius="6" Margin="0,0,5,5">
+                    <StackPanel>
+                        <TextBlock Text="{DynamicResource slots}" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock x:Name="Slots" Text="0000" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="22"/>
+                    </StackPanel>
+                </materialDesign:Card>
+                <!--Test-->
+                <TextBlock x:Name="test" />
+            </WrapPanel>
+        </ScrollViewer>
+        
     </Grid>
 </UserControl>
