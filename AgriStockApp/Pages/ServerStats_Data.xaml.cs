@@ -20,32 +20,44 @@ namespace AgriStockApp.Pages
 {
     public partial class ServerStats_Data : UserControl
     {
-        public ServerStats_Data(string xmlData)
+        //Fields
+        Window window;
+
+        //Ctor
+        public ServerStats_Data()
         {
+            //Wake up
             InitializeComponent();
             Debug.WriteLine(">>> Opening ServerStats_Data...");
 
-            RefreshXml();
+            //Update Trigger
+            MainWindow._servUpdate += new serverUpdateEventHandler(Update_Data);
+
+            //Display Data
+            Read_Data();
         }
 
         //Functions
-        //Read & Display datas
-        internal async void Read_Data(string xmlData)
+        //Update datas
+        internal void Update_Data()
         {
-            if (xmlData == "error") { dataBox.Text = "Error!"; return; }
-            dynamic serverData = await Task.Run(() => JsonConvert.DeserializeObject(xmlData));
-            dataBox.Text = serverData.careerSavegame.settings.ToString();
+            //If not active page => Skip
+            window = Window.GetWindow(this);
+            if (window == null) return;
 
-            Debug.WriteLine(">>>> ServerStats_Data Displayed...");
+            //Else
+            Read_Data();
         }
 
-        //Refresh datas
-        internal async void RefreshXml()
+        //Display datas
+        internal async void Read_Data()
         {
-            Debug.WriteLine(">>>> Refreshing ServerStats_Data...");
+            string xmlData = MainWindow.ServerData;
+            if (xmlData == "error") { dataBox.Text = "Error!"; return; }
+            dynamic serverData = await Task.Run(() => JsonConvert.DeserializeObject(xmlData));
+            dataBox.Text = await Task.Run(() => serverData.ToString());
 
-            string XMLData = await Task.Run(() => Fonctions.getServerData_XML_to_JSON(FS_Api.Career(MainWindow.Current_FS_Host, MainWindow.Current_FS_Key)));
-            Read_Data(XMLData);
+            Debug.WriteLine(">>>> ServerStats_Data Displayed...");
         }
     }
 }

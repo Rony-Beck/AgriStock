@@ -24,18 +24,20 @@ namespace AgriStockApp.Pages
 
             statsPageHolder.DataContext = this.DataContext;
 
-            RefreshXml();
+            //Update Trigger
+            MainWindow._servUpdate +=  new serverUpdateEventHandler(ReadDatas);
         }
 
         //Fonctions
         //Read & Display datas
-        internal void ReadDatas(string xmlData)
+        internal void ReadDatas()
         {
             Debug.WriteLine(">> Processing ServerStats...");
             serverRefresh.IsEnabled = true;
 
+            string xData = MainWindow.ServerData;
             //if offline
-            if (xmlData == "error")
+            if (xData == "error")
             {
                 serverName.Text = (string)Application.Current.FindResource("serverOffline");
                 serverName.Foreground = new SolidColorBrush(Colors.OrangeRed);
@@ -47,7 +49,7 @@ namespace AgriStockApp.Pages
             }
 
             //else
-            dynamic serverData = JsonConvert.DeserializeObject(xmlData);
+            dynamic serverData = JsonConvert.DeserializeObject(xData);
             
             //check if idle
             if (serverData.server.game == "")
@@ -66,26 +68,13 @@ namespace AgriStockApp.Pages
             serverName.Foreground = new SolidColorBrush(Colors.SkyBlue);
             serverPlayers.Text = serverData.slots.used + "/" + serverData.slots.capacity;
             
-            if (NavFrom == "ServerStats_Overview") { statsPageHolder.DataContext = new ServerStats_Overview(MainWindow.CareerSavegame); }
-            if (NavFrom == "ServerStats_Map") { statsPageHolder.DataContext = new ServerStats_Map(xmlData); }
-            if (NavFrom == "ServerStats_Mods") { statsPageHolder.DataContext = new ServerStats_Mods(xmlData); }
-            if (NavFrom == "ServerStats_Data") { statsPageHolder.DataContext = new ServerStats_Data(xmlData); }
+            //if (NavFrom == "ServerStats_Overview") { statsPageHolder.DataContext = new ServerStats_Overview(MainWindow.CareerSavegame); }
+            //if (NavFrom == "ServerStats_Map") { statsPageHolder.DataContext = new ServerStats_Map(xData); }
+            if (NavFrom == "ServerStats_Mods") { statsPageHolder.DataContext = new ServerStats_Mods(xData); }
+            //if (NavFrom == "ServerStats_Data") { statsPageHolder.DataContext = new ServerStats_Data(xData); }
 
             Menu_Is_Active(true);
             Fill_Players_List(serverData.slots.players);
-        }
-
-        //Refresh datas
-        internal async void RefreshXml()
-        {
-            Debug.WriteLine(">> Refreshing ServerStats...");
-            
-            MainWindow.CareerSavegame = await Task.Run(() => Fonctions.getServerData_XML_to_JSON(FS_Api.Career(MainWindow.Current_FS_Host, MainWindow.Current_FS_Key)));
-            MainWindow.ServerData = await Task.Run(() => Fonctions.getServerData(FS_Api.Stats(MainWindow.Current_FS_Host, MainWindow.Current_FS_Key)));
-            
-            ReadDatas(MainWindow.ServerData);
-            
-            notifBar.MessageQueue.Enqueue((string)Application.Current.FindResource("refreshedDatas"));
         }
 
         //Activate buttons
@@ -171,7 +160,8 @@ namespace AgriStockApp.Pages
         {
             //notifBar.MessageQueue.Enqueue((string)Application.Current.FindResource("requestingDatas"));
             serverRefresh.IsEnabled = false;
-            RefreshXml();
+            MainWindow.RefreshXml();
+            ReadDatas();
         }
 
         //Access Overview page
@@ -191,7 +181,7 @@ namespace AgriStockApp.Pages
         //Access Rawdatas page
         private void Data_Button_Click(object sender, RoutedEventArgs e)
         {
-            statsPageHolder.DataContext = new ServerStats_Data(MainWindow.ServerData);
+            statsPageHolder.DataContext = new ServerStats_Data();
             NavFrom = "ServerStats_Data";
         }
 

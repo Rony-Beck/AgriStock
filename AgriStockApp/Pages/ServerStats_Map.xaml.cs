@@ -29,6 +29,9 @@ namespace AgriStockApp.Pages
         Point? lastMousePositionOnTarget;
         Point? lastDragPoint;
 
+        //Fields
+        Window window;
+
         //Ctor
         public ServerStats_Map(string xmlData)
         {
@@ -47,14 +50,51 @@ namespace AgriStockApp.Pages
             slider.ValueChanged += OnSliderValueChanged;
 
             //Load map and datas
-            dynamic serverData = JsonConvert.DeserializeObject(xmlData);
-            LoadMap(serverData);
-            LoadFields(serverData.fields);
-            LoadVehicles(serverData.vehicles);
-            LoadUsers(serverData.slots.players);
+            LoadPage();
+
+            //Trigger
+            MainWindow._servUpdate += new serverUpdateEventHandler(RefreshPins);
+            this.Loaded += Ready;
         }
 
         //Functions
+        //Page ready
+        private void Ready(object sender, RoutedEventArgs e)
+        {
+            RefreshPins();
+        }
+
+        internal void LoadPage()
+        {
+            string xmlData = MainWindow.ServerData;
+            dynamic serverData = JsonConvert.DeserializeObject(xmlData);
+            LoadMap(serverData);
+            //RefreshPins();
+            Debug.WriteLine(">>> ServerStats_Map displayed...");
+        }
+
+        internal void RefreshPins()
+        {
+            //Clear Pins
+            mapOver.Children.Clear();
+
+            //If not active page => Skip
+            window = Window.GetWindow(this);
+            if (window == null) return;
+
+            //Else
+            string xmlData = MainWindow.ServerData;
+            dynamic serverData = JsonConvert.DeserializeObject(xmlData);
+            
+            //Add new pins
+            LoadFields(serverData.fields);
+            LoadVehicles(serverData.vehicles);
+            LoadUsers(serverData.slots.players);
+
+            //Debug
+            Debug.WriteLine(">>> ServerStats_Map refreshed...");
+        }
+
         internal void LoadVehicles(dynamic serverData)
         {
             foreach (var item in serverData)
