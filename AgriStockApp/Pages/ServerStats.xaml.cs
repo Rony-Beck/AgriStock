@@ -68,10 +68,7 @@ namespace AgriStockApp.Pages
             serverName.Foreground = new SolidColorBrush(Colors.SkyBlue);
             serverPlayers.Text = serverData.slots.used + "/" + serverData.slots.capacity;
             
-            //if (NavFrom == "ServerStats_Overview") { statsPageHolder.DataContext = new ServerStats_Overview(MainWindow.CareerSavegame); }
-            //if (NavFrom == "ServerStats_Map") { statsPageHolder.DataContext = new ServerStats_Map(xData); }
             if (NavFrom == "ServerStats_Mods") { statsPageHolder.DataContext = new ServerStats_Mods(xData); }
-            //if (NavFrom == "ServerStats_Data") { statsPageHolder.DataContext = new ServerStats_Data(xData); }
 
             Menu_Is_Active(true);
             Fill_Players_List(serverData.slots.players);
