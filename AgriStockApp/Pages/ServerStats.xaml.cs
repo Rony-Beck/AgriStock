@@ -32,8 +32,8 @@ namespace AgriStockApp.Pages
         //Read & Display datas
         internal void ReadDatas()
         {
-            Debug.WriteLine(">> Processing ServerStats...");
             serverRefresh.IsEnabled = true;
+            notifBar.MessageQueue.Enqueue((string)Application.Current.FindResource("refreshedDatas"));
 
             string xData = MainWindow.ServerData;
             //if offline
