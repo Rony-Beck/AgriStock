@@ -60,7 +60,7 @@
         </materialDesign:Card>
 
         <!--Content Zone-->
-        <ScrollViewer Grid.Row="1" Background="#FF121721" Foreground="#FF035378" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Style="{DynamicResource MaterialDesignScrollViewer}">
+        <ScrollViewer Grid.Row="1" Background="#FF121721" Foreground="#FF035378" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Style="{DynamicResource MaterialDesignScrollViewer}">
             <StackPanel x:Name="modsList_Zone" CanHorizontallyScroll="False"/>
         </ScrollViewer>
     </Grid>
