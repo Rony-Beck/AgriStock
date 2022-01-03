@@ -108,8 +108,8 @@ namespace AgriStockApp.Pages
 
             //Get server game
             Game = serverData.server.game;
-            Debug.WriteLine(Game);
 
+            //Set game folder
             if (Game == "Farming Simulator 22")
             {
                 GameFolder = "FarmingSimulator2022";
@@ -120,7 +120,11 @@ namespace AgriStockApp.Pages
                 GameFolder = "FarmingSimulator2019";
                 GameImg = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "Assets\\Img\\fs19.png", UriKind.Absolute));
             }
-            else { return; }
+            else 
+            {
+                Unsupported_Game();
+                return; 
+            }
 
             //Get Local Mods List
             ModPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\" + GameFolder + "\\mods";
@@ -285,6 +289,18 @@ namespace AgriStockApp.Pages
             ModsSynced++;
             if (isNew) ModsNew--;
             if (isUpdate) ModsToUpdate--;
+        }
+
+        //Jeu non supporté
+        internal void Unsupported_Game()
+        {
+            ProgressCircle.Visibility = Visibility.Collapsed;
+            SyncButtonIcon.Visibility = Visibility.Visible;
+
+            SyncButton.IsEnabled = false;
+            SyncButton.Background = Brushes.OrangeRed;
+            SyncButtonText.Text = (string)Application.Current.FindResource("unsupportedGame");
+            SyncButtonIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.SyncAlert;
         }
 
         //Boutons
