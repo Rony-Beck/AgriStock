@@ -96,11 +96,23 @@ namespace AgriStockApp.Pages
                 PropertyChanged(this, new PropertyChangedEventArgs(Name));
         }
 
+        //Reset Counter
+        internal void ResetCounters()
+        {
+            ModsNew = 0;
+            ModsSynced = 0;
+            ModsTotal = 0;
+            ModsToUpdate = 0;
+        }
+
         //Load & Display Modslist
         internal async void LoadList(string xmlData)
         {
             //Reset list
             Mods.Clear();
+            modsList_Zone.Children.Clear();
+            //Reset counters
+            ResetCounters();
             //Security
             if (xmlData == "error") { return; }
             //Read datas
