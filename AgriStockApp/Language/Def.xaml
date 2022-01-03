@@ -7,6 +7,7 @@
     
     
     <!--Words-->
+    <system:String x:Key="author">Author</system:String>
     <system:String x:Key="created">Created</system:String>
     <system:String x:Key="done">Finished</system:String>
     <system:String x:Key="downLoad">Download</system:String>

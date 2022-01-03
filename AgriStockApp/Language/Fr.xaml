@@ -7,6 +7,7 @@
     
     
     <!--Mots-->
+    <system:String x:Key="author">Auteur</system:String>
     <system:String x:Key="created">Création</system:String>
     <system:String x:Key="done">Terminé</system:String>
     <system:String x:Key="downLoad">Télécharger</system:String>
