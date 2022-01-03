@@ -25,17 +25,23 @@ namespace AgriStockApp.Pages
             statsPageHolder.DataContext = this.DataContext;
 
             //Update Trigger
-            MainWindow._servUpdate +=  new serverUpdateEventHandler(ReadDatas);
+            MainWindow._servUpdate +=  new serverUpdateEventHandler(ServUpdate);
         }
 
         //Fonctions
+        //After auto-update
+        internal void ServUpdate()
+        {
+            ReadDatas();
+            notifBar.MessageQueue.Enqueue((string)Application.Current.FindResource("refreshedDatas"));
+        }
+
         //Read & Display datas
         internal void ReadDatas()
         {
             serverRefresh.IsEnabled = true;
-            notifBar.MessageQueue.Enqueue((string)Application.Current.FindResource("refreshedDatas"));
-
             string xData = MainWindow.ServerData;
+
             //if offline
             if (xData == "error")
             {
@@ -68,8 +74,6 @@ namespace AgriStockApp.Pages
             serverName.Foreground = new SolidColorBrush(Colors.SkyBlue);
             serverPlayers.Text = serverData.slots.used + "/" + serverData.slots.capacity;
             
-            if (NavFrom == "ServerStats_Mods") { statsPageHolder.DataContext = new ServerStats_Mods(xData); }
-
             Menu_Is_Active(true);
             Fill_Players_List(serverData.slots.players);
         }
@@ -155,10 +159,10 @@ namespace AgriStockApp.Pages
         //Refresh datas
         private void serverRefresh_Click(object sender, RoutedEventArgs e)
         {
-            //notifBar.MessageQueue.Enqueue((string)Application.Current.FindResource("requestingDatas"));
             serverRefresh.IsEnabled = false;
             MainWindow.RefreshXml();
             ReadDatas();
+            if (NavFrom == "ServerStats_Mods") { statsPageHolder.DataContext = new ServerStats_Mods(MainWindow.ServerData); }
         }
 
         //Access Overview page
