@@ -33,6 +33,7 @@
     <system:String x:Key="serverIdle">Serveur en attente</system:String>
     <system:String x:Key="serverOffline">Serveur hors-ligne</system:String>
     <system:String x:Key="slots">Slots</system:String>
+    <system:String x:Key="unsupportedGame">Jeu non supporté</system:String>
     <system:String x:Key="update">Mise à jour</system:String>
     <system:String x:Key="updating">En cours</system:String>
     <system:String x:Key="uptime">Temps:</system:String>

@@ -33,6 +33,7 @@
     <system:String x:Key="serverName">Server name</system:String>
     <system:String x:Key="serverOffline">Server offline</system:String>
     <system:String x:Key="slots">Slots</system:String>
+    <system:String x:Key="unsupportedGame">Unsupported game</system:String>
     <system:String x:Key="update">Update</system:String>
     <system:String x:Key="updating">Updating</system:String>
     <system:String x:Key="uptime">Uptime:</system:String>
