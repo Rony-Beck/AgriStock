@@ -155,6 +155,7 @@ namespace AgriStockApp.Pages
                 //Construction de la Grid mère
                 Grid MotherGrid = new Grid();
                 MotherGrid.Height = 60;
+                MotherGrid.Margin = new Thickness(0, 0, 0, 10);
                 modsList_Zone.Children.Add(MotherGrid);
                 
                 //Ajout des colonnes
@@ -175,28 +176,33 @@ namespace AgriStockApp.Pages
                 //ModName
                 TextBlock ModName = new TextBlock();
                 Details.Children.Add(ModName);
-                ModName.Text = mod.name + ".zip";
+                ModName.Text = mod.description;
                 ModName.Foreground = Brushes.White;
                 ModName.FontSize = 18;
                 ModName.TextWrapping = TextWrapping.WrapWithOverflow;
-                //ModAsh
-                TextBlock ModAsh = new TextBlock();
-                Details.Children.Add(ModAsh);
-                ModAsh.Text = "Hash: " + (string)mod.hash;
-                ModAsh.Foreground = Brushes.DarkOrange;
-                ModAsh.FontSize = 10;
+                //ModAuthor
+                TextBlock ModAuthor = new TextBlock();
+                Details.Children.Add(ModAuthor);
+                ModAuthor.Text = (string)Application.Current.FindResource("author") + ": " + (string)mod.author;
+                ModAuthor.Foreground = Brushes.LightGray;
+                ModAuthor.FontSize = 10;
+                //ModVersion
+                TextBlock ModVersion = new TextBlock();
+                Details.Children.Add(ModVersion);
+                ModVersion.Text = "Version: " + (string)mod.version;
+                ModVersion.Foreground = Brushes.ForestGreen;
+                ModVersion.FontSize = 10;
 
-                //Zone Bouton
-                Button Manage = new Button();
-                Manage.VerticalAlignment = VerticalAlignment.Center;
-                Manage.Name = "aa";
-                Manage.Content = (string)Application.Current.FindResource("downLoad");
-                Manage.ToolTip = (string)Application.Current.FindResource("downLoad") + " " + (string)mod.name;
-                Manage.Background = new SolidColorBrush(Color.FromRgb(0, 151, 68));
-                Manage.Margin = new Thickness(10);
-                Manage.Click += AddMod;
-                Manage.Visibility = Visibility.Collapsed;
-                Grid.SetColumn(Manage, 2);
+                //Zone IconState
+                MaterialDesignThemes.Wpf.PackIcon IconState = new MaterialDesignThemes.Wpf.PackIcon();
+                IconState.VerticalAlignment = VerticalAlignment.Center;
+                IconState.Kind = MaterialDesignThemes.Wpf.PackIconKind.NewBox;
+                IconState.HorizontalAlignment = HorizontalAlignment.Right;
+                IconState.Margin = new Thickness(0, 0, 10, 0);
+                IconState.Foreground = Brushes.ForestGreen;
+                IconState.Width = 30;
+                IconState.Height = 30;
+                Grid.SetColumn(IconState, 2);
 
                 //Zone Img
                 Image ModImg = new Image();
@@ -217,7 +223,7 @@ namespace AgriStockApp.Pages
                         {
                             //HashChecker
                             string modsHash = await Task.Run(() => Fonctions.GetModHash(@Path.Combine(ModPath, Path.GetFileName(item))));
-                            Debug.WriteLine(">> Hash: " + modsHash);
+                            //Debug.WriteLine(">> Hash: " + modsHash);
 
                             //Si Hash ne corresponds pas
                             if (modsHash != (string)mod.hash)
@@ -225,9 +231,8 @@ namespace AgriStockApp.Pages
                                 ThisMod.IsUpdate = true;
                                 ModsToUpdate++;
                                 ModsNew--;
-                                Manage.Content = (string)Application.Current.FindResource("update");
-                                Manage.ToolTip = (string)Application.Current.FindResource("update") + " " + (string)mod.name;
-                                Manage.Background = Brushes.Violet;
+                                IconState.Kind = MaterialDesignThemes.Wpf.PackIconKind.Check;
+                                IconState.Foreground = Brushes.Orange;
                                 break;
                             }
                         }
@@ -240,11 +245,7 @@ namespace AgriStockApp.Pages
                         ThisMod.IsInstalled = true;
                         ModsSynced++;
                         ModsNew--;
-                        Manage.Content = (string)Application.Current.FindResource("remove");
-                        Manage.ToolTip = (string)Application.Current.FindResource("remove") + " " + (string)mod.name;
-                        Manage.Background = Brushes.DarkOrange;
-                        Manage.Click -= AddMod;
-                        Manage.Click += RemoveMod;
+                        IconState.Kind = MaterialDesignThemes.Wpf.PackIconKind.CheckAll;
                         break;
                     }
                 }
@@ -254,7 +255,7 @@ namespace AgriStockApp.Pages
 
                 //Display
                 MotherGrid.Children.Add(Details);
-                MotherGrid.Children.Add(Manage);
+                MotherGrid.Children.Add(IconState);
                 MotherGrid.Children.Add(ModImg);
             }
 
@@ -304,66 +305,6 @@ namespace AgriStockApp.Pages
         }
 
         //Boutons
-        //Ajouter un mod
-        private void AddMod(object sender, RoutedEventArgs e)
-        {
-            //Button source = e.Source as Button;
-            //Grid pGrid = source.Parent as Grid;
-            //StackPanel pDetails = pGrid.Children[0] as StackPanel;
-            //TextBlock pModeName = pDetails.Children[0] as TextBlock;
-
-            //string WebModsPath = WebPath + pModeName.Text;
-
-            //source.IsEnabled = false;
-            //source.Content = (string)Application.Current.FindResource("wait");
-
-            //try
-            //{
-            //    await DownloadFileAsync(WebModsPath, Path.Combine(ModPath, pModeName.Text), source);
-
-            //    source.Click -= AddMod;
-            //    source.Click += RemoveMod;
-
-            //    source.Content = (string)Application.Current.FindResource("remove");
-            //    source.ToolTip = (string)Application.Current.FindResource("remove") + " " + pModeName.Text;
-            //    source.Background = Brushes.DarkOrange;
-            //}
-            //catch (Exception ex)
-            //{
-            //    source.Content = (string)Application.Current.FindResource("downLoad");
-            //    Debug.WriteLine(ex);
-            //}
-            //source.IsEnabled = true;
-        }
-
-        //Retirer un mod
-        private void RemoveMod(object sender, RoutedEventArgs e)
-        {
-            Button source = e.Source as Button;
-            Grid pGrid = source.Parent as Grid;
-            StackPanel pDetails = pGrid.Children[0] as StackPanel;
-            TextBlock pModeName = pDetails.Children[0] as TextBlock;
-
-            source.IsEnabled = false;
-
-            try
-            {
-                File.Delete(Path.Combine(ModPath, pModeName.Text));
-                source.Click += AddMod;
-                source.Click -= RemoveMod;
-
-                source.Content = (string)Application.Current.FindResource("downLoad");
-                source.ToolTip = (string)Application.Current.FindResource("downLoad") + " " + pModeName.Text;
-                source.Background = new SolidColorBrush(Color.FromRgb(0, 151, 68));
-            }
-            catch
-            {
-                Debug.WriteLine(pModeName.Text + " not deleted");
-            }
-
-            source.IsEnabled = true;
-        }
-
         private async void SyncButton_Click(object sender, RoutedEventArgs e)
         {
             SyncButton.IsEnabled = false;
