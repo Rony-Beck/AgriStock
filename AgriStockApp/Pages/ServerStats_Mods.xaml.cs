@@ -75,7 +75,6 @@ namespace AgriStockApp.Pages
             set { progressCurrent = value; Update("ProgressCurrent"); }
         }
 
-
         //Ctor
         public ServerStats_Mods(string xmlData)
         {
@@ -107,16 +106,21 @@ namespace AgriStockApp.Pages
             //Read datas
             dynamic serverData = await Task.Run(() => JsonConvert.DeserializeObject(xmlData));
 
-            //*************************************
-            //Add Automatic game detector api based
-            //*************************************
-            Game = "fs22";
+            //Get server game
+            Game = serverData.server.game;
+            Debug.WriteLine(Game);
 
-            if (Game == "fs22")
+            if (Game == "Farming Simulator 22")
             {
                 GameFolder = "FarmingSimulator2022";
                 GameImg = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "Assets\\Img\\fs22.png", UriKind.Absolute));
             }
+            else if (Game == "Farming Simulator 19")
+            {
+                GameFolder = "FarmingSimulator2019";
+                GameImg = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "Assets\\Img\\fs19.png", UriKind.Absolute));
+            }
+            else { return; }
 
             //Get Local Mods List
             ModPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\" + GameFolder + "\\mods";
