@@ -321,6 +321,10 @@ namespace AgriStockApp.Pages
                 SyncButton.IsEnabled = false;
             }
 
+            //Recharger le tableau
+            LoadList(MainWindow.ServerData);
+
+            //Modifier bouton
             ProgressCircle.Visibility = Visibility.Collapsed;
             SyncButtonIcon.Visibility = Visibility.Visible;
             SyncButtonIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.CheckboxMarkedCircleOutline;
