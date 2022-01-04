@@ -1,9 +1,7 @@
-﻿using AgriStockApp.Scripts;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,6 +12,7 @@ namespace AgriStockApp.Pages
     {
         //Props
         public static string NavFrom { get; set; }
+        public bool ColdStart { get; set; }
 
         //Ctor
         public ServerStats()
@@ -21,7 +20,7 @@ namespace AgriStockApp.Pages
             InitializeComponent();
             
             Debug.WriteLine(">> Accessing ServerStats...");
-
+            ColdStart = true;
             statsPageHolder.DataContext = this.DataContext;
 
             //Update Trigger
@@ -34,6 +33,14 @@ namespace AgriStockApp.Pages
         {
             ReadDatas();
             notifBar.MessageQueue.Enqueue((string)Application.Current.FindResource("refreshedDatas"));
+
+            if (ColdStart == true)
+            {
+                ColdStart = false;
+                //Go HomePage
+                statsPageHolder.DataContext = new ServerStats_Overview(MainWindow.CareerSavegame);
+                NavFrom = "ServerStats_Overview";
+            }
         }
 
         //Read & Display datas
@@ -114,7 +121,6 @@ namespace AgriStockApp.Pages
                     });
                 }
             }
-
             Players_list.ItemsSource = player;
         }
 
