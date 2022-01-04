@@ -8,42 +8,90 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <!--Header Zone-->
-        <materialDesign:Card Background="#FF0D141B" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="0,0,0,6">
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <!--Title-->
-                <TextBlock Text="{DynamicResource overview}" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--Header Zone-->
+                <materialDesign:Card Background="#FF0D141B" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="0,0,0,6">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--Title-->
+                        <TextBlock Text="{DynamicResource gameOverview}" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold"/>
+                    </Grid>
+                </materialDesign:Card>
+                <!--Content Zone-->
+                <StackPanel Grid.Row="1">
+                    <!--ZoneTop-->
+                    <materialDesign:Card Background="#FF121721" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="0,0,0,6">
+                        <Grid Height="200">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            <!--ResumeZone-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <!--MapName-->
+                                <TextBlock Text="{DynamicResource mapName}" VerticalAlignment="Center" FontSize="18" Foreground="#FFB4B1B1" FontStyle="Italic"/>
+                                <TextBlock x:Name="MapName" Text="{Binding MapNameData, Mode=OneWay}" Grid.Column="1" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <!--Created-->
+                                <TextBlock Text="{DynamicResource created}" VerticalAlignment="Center" FontSize="18" Foreground="#FFB4B1B1" FontStyle="Italic" Grid.Row="1"/>
+                                <TextBlock x:Name="CreatedDate" Text="{Binding CreatedDateData, Mode=OneWay}" Grid.Column="1" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1"/>
+                                <!--SaveDate-->
+                                <TextBlock Text="{DynamicResource save}" VerticalAlignment="Center" FontSize="18" Foreground="#FFB4B1B1" FontStyle="Italic" Grid.Row="2"/>
+                                <TextBlock x:Name="SaveDate" Text="{Binding SaveDateData, Mode=OneWay}" Grid.Column="1" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="2"/>
+                                <!--Slots-->
+                                <TextBlock Text="{DynamicResource hardwareSlots}" VerticalAlignment="Center" FontSize="18" Foreground="#FFB4B1B1" FontStyle="Italic" Grid.Row="3"/>
+                                <TextBlock x:Name="SlotsUsage" Text="{Binding SlotsUsageData, Mode=OneWay}" Grid.Column="1" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="3"/>
+                            </Grid>
+                            <!--MapZone-->
+                            <StackPanel Grid.Column="1">
+                                <Image x:Name="MiniMap" ToolTip="{DynamicResource watchMap}" Cursor="Hand" MouseLeftButtonDown="MiniMap_MouseLeftButtonDown"/>
+                            </StackPanel>
+                        </Grid>
+                    </materialDesign:Card>
+
+                    <!--Zone Bottom-->
+                    <Grid Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <!--Header Zone-->
+                        <materialDesign:Card Background="#FF0D141B" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="0,0,0,6">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <!--Title-->
+                                <TextBlock Text="{DynamicResource agristockOverview}" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold"/>
+                            </Grid>
+                        </materialDesign:Card>
+                        <!--Content-->
+                        <materialDesign:Card Background="#FF121721" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Height="700" Grid.Row="1">
+                            <WrapPanel>
+                                <!--AGRISTOCK PLACEHOLDER-->
+                            </WrapPanel>
+                        </materialDesign:Card>
+                    </Grid>
+                </StackPanel>
             </Grid>
-        </materialDesign:Card>
-        <ScrollViewer Grid.Row="1" Grid.RowSpan="2">
-            <WrapPanel>
-                <!--Created-->
-                <materialDesign:Card Background="#FF14202C" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="200" Padding="8" UniformCornerRadius="6" Margin="0,0,5,5">
-                    <StackPanel>
-                        <TextBlock Text="{DynamicResource created}" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"/>
-                        <TextBlock x:Name="Created" Text="00/00/0000" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="22"/>
-                    </StackPanel>
-                </materialDesign:Card>
-                <!--Slots-->
-                <materialDesign:Card Background="#FF14202C" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="200" Padding="8" UniformCornerRadius="6" Margin="0,0,5,5">
-                    <StackPanel>
-                        <TextBlock Text="{DynamicResource slots}" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"/>
-                        <TextBlock x:Name="Slots" Text="0000" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="22"/>
-                    </StackPanel>
-                </materialDesign:Card>
-                <!--Test-->
-                <TextBlock x:Name="test" />
-            </WrapPanel>
         </ScrollViewer>
-        
     </Grid>
 </UserControl>
