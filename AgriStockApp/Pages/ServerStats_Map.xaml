@@ -43,7 +43,7 @@
         </materialDesign:Card>
 
         <!--Map Zone-->
-        <Grid Grid.Row="1">
+        <Grid x:Name="MapZone" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>

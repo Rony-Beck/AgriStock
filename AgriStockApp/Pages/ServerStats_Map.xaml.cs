@@ -1,20 +1,10 @@
 ﻿using AgriStockApp.Scripts;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AgriStockApp.Pages
@@ -49,18 +39,15 @@ namespace AgriStockApp.Pages
 
             slider.ValueChanged += OnSliderValueChanged;
 
-            //Load map and datas
-            LoadPage();
-
             //Trigger
             MainWindow._servUpdate += new serverUpdateEventHandler(RefreshPins);
             this.Loaded += Ready;
         }
 
         //Functions
-        //Page ready
         private void Ready(object sender, RoutedEventArgs e)
         {
+            LoadPage();
             RefreshPins();
         }
 
@@ -69,7 +56,6 @@ namespace AgriStockApp.Pages
             string xmlData = MainWindow.ServerData;
             dynamic serverData = JsonConvert.DeserializeObject(xmlData);
             LoadMap(serverData);
-            //RefreshPins();
             Debug.WriteLine(">>> ServerStats_Map displayed...");
         }
 
@@ -85,7 +71,7 @@ namespace AgriStockApp.Pages
             //Else
             string xmlData = MainWindow.ServerData;
             dynamic serverData = JsonConvert.DeserializeObject(xmlData);
-            
+
             //Add new pins
             LoadFields(serverData.fields);
             LoadVehicles(serverData.vehicles);
@@ -116,6 +102,9 @@ namespace AgriStockApp.Pages
             mapOver.Width = MapSize;
             mapOver.Height = MapSize;
 
+            //Center Map
+            scrollViewer.ScrollToHorizontalOffset((MapSize - MapZone.ActualWidth) / 2);
+            scrollViewer.ScrollToVerticalOffset((MapSize - MapZone.ActualHeight) / 2);
 
             mapName.Text = serverData.server.mapName;
             fieldsValue.Text = serverData.fields.Count.ToString();
