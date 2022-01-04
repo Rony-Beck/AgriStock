@@ -7,6 +7,7 @@
     
     
     <!--Mots-->
+    <system:String x:Key="agristockOverview">Vue d'ensemble AgriStock</system:String>
     <system:String x:Key="author">Auteur</system:String>
     <system:String x:Key="created">Création</system:String>
     <system:String x:Key="done">Terminé</system:String>
@@ -14,6 +15,8 @@
     <system:String x:Key="emptySlot">Emplacement libre</system:String>
     <system:String x:Key="farmLands">Domaines:</system:String>
     <system:String x:Key="fields">Champs:</system:String>
+    <system:String x:Key="gameOverview">Vue d'ensemble de la partie</system:String>
+    <system:String x:Key="hardwareSlots">Slots matériel</system:String>
     <system:String x:Key="installed">Installé</system:String>
     <system:String x:Key="loading">Chargement...</system:String>
     <system:String x:Key="map">Carte</system:String>
@@ -29,6 +32,7 @@
     <system:String x:Key="refreshedDatas">Données à jour.</system:String>
     <system:String x:Key="remove">Retirer</system:String>
     <system:String x:Key="requestingDatas">Récupération des données...</system:String>
+    <system:String x:Key="save">Sauvegarde</system:String>
     <system:String x:Key="scanning">Scan en cours</system:String>
     <system:String x:Key="serverName">Nom du serveur</system:String>
     <system:String x:Key="serverIdle">Serveur en attente</system:String>
@@ -40,6 +44,7 @@
     <system:String x:Key="uptime">Temps:</system:String>
     <system:String x:Key="upToDate">A jour</system:String>
     <system:String x:Key="wait">Patientez...</system:String>
+    <system:String x:Key="watchMap">Voir la carte</system:String>
 
     <!--Phrases-->
 </ResourceDictionary>

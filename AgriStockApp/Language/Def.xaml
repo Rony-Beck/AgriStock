@@ -7,6 +7,7 @@
     
     
     <!--Words-->
+    <system:String x:Key="agristockOverview">AgriStock overview</system:String>
     <system:String x:Key="author">Author</system:String>
     <system:String x:Key="created">Created</system:String>
     <system:String x:Key="done">Finished</system:String>
@@ -14,6 +15,8 @@
     <system:String x:Key="emptySlot">Slot empty</system:String>
     <system:String x:Key="farmLands">Farmlands:</system:String>
     <system:String x:Key="fields">Fields:</system:String>
+    <system:String x:Key="gameOverview">Game overview</system:String>
+    <system:String x:Key="hardwareSlots">Hardware slots</system:String>
     <system:String x:Key="installed">Installed</system:String>
     <system:String x:Key="loading">Loading...</system:String>
     <system:String x:Key="map">Map</system:String>
@@ -29,6 +32,7 @@
     <system:String x:Key="refreshedDatas">Datas updated</system:String>
     <system:String x:Key="remove">Remove</system:String>
     <system:String x:Key="requestingDatas">Updating datas...</system:String>
+    <system:String x:Key="save">Save</system:String>
     <system:String x:Key="scanning">Scanning</system:String>
     <system:String x:Key="serverIdle">Server in idle state</system:String>
     <system:String x:Key="serverName">Server name</system:String>
@@ -40,6 +44,7 @@
     <system:String x:Key="uptime">Uptime:</system:String>
     <system:String x:Key="upToDate">Up to date</system:String>
     <system:String x:Key="wait">Wait...</system:String>
+    <system:String x:Key="watchMap">Watch map</system:String>
 
     <!--Strings-->
 </ResourceDictionary>
