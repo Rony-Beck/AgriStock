@@ -43,8 +43,8 @@ namespace AgriStockApp.Pages
             set { saveDateData = value; Update("SaveDateData"); }
         }
 
-        private int slotsUsageData;
-        public int SlotsUsageData
+        private string slotsUsageData;
+        public string SlotsUsageData
         {
             get { return slotsUsageData; }
             set { slotsUsageData = value; Update("SlotsUsageData"); }
@@ -112,7 +112,7 @@ namespace AgriStockApp.Pages
 
             CreatedDateData = data.creationDate;
             SaveDateData = data.saveDate;
-            SlotsUsageData = (int)json.careerSavegame.slotSystem.slotUsage;
+            SlotsUsageData = json.careerSavegame.slotSystem.slotUsage;
         }
 
         internal void SetMinimap()
