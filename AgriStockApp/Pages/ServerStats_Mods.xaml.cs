@@ -80,7 +80,7 @@ namespace AgriStockApp.Pages
         {
             InitializeComponent();
             this.DataContext = this;
-            WebPath = Config.FS_Host + "/mods/";
+            WebPath = Properties.Settings.Default.ServerHost + "/mods/";
             LoadList(xmlData);
         }
 
