@@ -198,5 +198,12 @@ namespace AgriStockApp.Pages
             statsPageHolder.DataContext = new ServerStats_Mods(MainWindow.ServerData);
             NavFrom = "ServerStats_Mods";
         }
+
+        //Access Settings page
+        private void Settingd_Button_Click(object sender, RoutedEventArgs e)
+        {
+            statsPageHolder.DataContext = new Settings(false);
+            NavFrom = "Settings";
+        }
     }
 }

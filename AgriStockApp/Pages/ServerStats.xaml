@@ -47,6 +47,7 @@
                     <Button x:Name="Overview_Button" Content="{DynamicResource overview}" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" BorderBrush="{x:Null}" Margin="0,10,0,0" Click="Overview_Button_Click" IsEnabled="False" Cursor="Hand"/>
                     <Button x:Name="Map_Button" Content="{DynamicResource map}" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" BorderBrush="{x:Null}" Margin="0,4,0,0" Cursor="Hand" Click="Map_Button_Click" IsEnabled="False"/>
                     <Button x:Name="Mods_Button" Content="{DynamicResource modManager}" Background="#FF009744" BorderBrush="{x:Null}" Margin="0,4,0,0" Cursor="Hand" Click="Mods_Button_Click" IsEnabled="False"/>
+                    <Button x:Name="Settingd_Button" Content="{DynamicResource settings}" Background="#FF101517" BorderBrush="{x:Null}" Margin="0,4,0,0" Cursor="Hand" Click="Settingd_Button_Click"/>
                     <Button Visibility="Collapsed" x:Name="Data_Button" Content="{DynamicResource rawDatas}" Background="{DynamicResource MaterialDesignLightSeparatorBackground}" BorderBrush="{x:Null}" Margin="0,4,0,0" Cursor="Hand" Click="Data_Button_Click" IsEnabled="False"/>
                 </StackPanel>
             </materialDesign:Card>
