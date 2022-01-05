@@ -55,32 +55,33 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="28"/>
-                        <RowDefinition MaxHeight="300" Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="{DynamicResource players}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"/>
-                    <ScrollViewer Grid.Row="1" Background="#FF121721" CanContentScroll="True" Foreground="#FF035378" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Style="{DynamicResource MaterialDesignScrollViewer}">
-                        <DataGrid x:Name="Players_list" Grid.Row="1" Background="{DynamicResource AttentionToActionBrush}" BorderBrush="{x:Null}" Foreground="{DynamicResource MaterialDesignDarkForeground}" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" GridLinesVisibility="None" HeadersVisibility="None" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Focusable="False" AutoGenerateColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTemplateColumn CanUserResize="False" CanUserReorder="False">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <StackPanel>
-                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <TextBlock x:Name="nomMembre" Text="{Binding name}" Foreground="{Binding nameColor}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                    </StackPanel>
-                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Visibility="{Binding infoVisibility}">
-                                                        <TextBlock Text="{DynamicResource uptime}" Foreground="#FFAAAAAA" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,5,0"/>
-                                                        <TextBlock Text="{Binding uptimeDisplay}" Foreground="#FFAAAAAA" VerticalAlignment="Center"/>
-                                                    </StackPanel>
+                    <DataGrid x:Name="Players_list" Grid.Row="1" BorderBrush="{x:Null}" Foreground="{DynamicResource MaterialDesignDarkForeground}" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" GridLinesVisibility="None" HeadersVisibility="None" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" Focusable="False" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" MinHeight="60" MaxHeight="300">
+                        <DataGrid.Background>
+                            <SolidColorBrush Color="#FF0D141B" Opacity="0.23"/>
+                        </DataGrid.Background>
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn CanUserResize="False" CanUserReorder="False">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <StackPanel>
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <TextBlock x:Name="nomMembre" Text="{Binding name}" Foreground="{Binding nameColor}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Visibility="{Binding infoVisibility}">
+                                                    <TextBlock Text="{DynamicResource uptime}" Foreground="#FFAAAAAA" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,5,0"/>
+                                                    <TextBlock Text="{Binding uptimeDisplay}" Foreground="#FFAAAAAA" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </ScrollViewer>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </materialDesign:Card>
         </StackPanel>
