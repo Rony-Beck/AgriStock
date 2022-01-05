@@ -109,7 +109,7 @@ namespace AgriStockApp.Pages
             mapName.Text = serverData.server.mapName;
             fieldsValue.Text = serverData.fields.Count.ToString();
             mapSizeValue.Text = MapSize.ToString();
-            mapImage.Source =  new ImageSourceConverter().ConvertFromString(FS_Api.Map(MainWindow.Current_FS_Host, MainWindow.Current_FS_Key)) as ImageSource;
+            mapImage.Source =  new ImageSourceConverter().ConvertFromString(FS_Api.Map(Properties.Settings.Default.ServerHost, Properties.Settings.Default.ServerKey)) as ImageSource;
         }
 
         internal void LoadPallets (dynamic pallet)

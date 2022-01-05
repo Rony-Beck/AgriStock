@@ -117,7 +117,7 @@ namespace AgriStockApp.Pages
 
         internal void SetMinimap()
         {
-            MiniMap.Source = new ImageSourceConverter().ConvertFromString(FS_Api.Map(MainWindow.Current_FS_Host, MainWindow.Current_FS_Key)) as ImageSource;
+            MiniMap.Source = new ImageSourceConverter().ConvertFromString(FS_Api.Map(Properties.Settings.Default.ServerHost, Properties.Settings.Default.ServerKey)) as ImageSource;
         }
 
         //Actions
