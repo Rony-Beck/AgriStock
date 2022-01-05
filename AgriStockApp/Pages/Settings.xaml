@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="AgriStockApp.Pages.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:AgriStockApp.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--Header Zone-->
+        <materialDesign:Card Background="#FF0D141B" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="0,0,0,6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!--Page title-->
+                <TextBlock Text="{DynamicResource settings}" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold"/>
+            </Grid>
+        </materialDesign:Card>
+
+        <!--Content Zone-->
+        <materialDesign:Card Background="#FF0D141B" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="300" Width="350">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <!--Lang Selector-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <!--Lang Selector Title-->
+                    <TextBlock Text="{DynamicResource lang}" VerticalAlignment="Center" Margin="20,0,0,0" FontStyle="Italic" FontWeight="Bold"/>
+                    <!--Switchs-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
+                        <RadioButton x:Name="ENButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="True" Content="EN" BorderBrush="#FF0BD830" Foreground="#FF898989" Cursor="Hand" ToolTip="Will take effect after a restart "/>
+                        <RadioButton x:Name="FRButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="FR" BorderBrush="#FF0BD830" Foreground="#FF898989" Cursor="Hand" ToolTip="Prendra effet après un redémarrage"/>
+                        <RadioButton IsEnabled="False" x:Name="DEButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="DE" BorderBrush="#FF0BD830" Foreground="#FF898989" Cursor="Hand" ToolTip="Wird nach einem Neustart wirksam "/>
+                    </StackPanel>
+                </Grid>
+                
+                <!--Server Settings-->
+                <Grid Grid.Row="1" Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <!--Server Settings Title-->
+                    <TextBlock Text="{DynamicResource serverSettings}" VerticalAlignment="Center" Margin="20,0,0,0" FontStyle="Italic" FontWeight="Bold"/>
+                    <!--Host Name-->
+                    <TextBox x:Name="HostNameForm" materialDesign:HintAssist.Hint="{DynamicResource panelHostName}" materialDesign:HintAssist.HelperText="{DynamicResource panelHostNameHelp}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="250" Background="#FF1C2B3A" Padding="4,4,4,4" BorderBrush="{x:Null}"/>
+                    <!--Server Key-->
+                    <PasswordBox x:Name="ServerKeyForm" materialDesign:HintAssist.Hint="{DynamicResource serverCode}" materialDesign:HintAssist.HelperText="{DynamicResource serverCodeHelp}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Background="#FF1C2B3A" Padding="4,4,4,4" Cursor="IBeam" BorderBrush="{x:Null}"/>
+                </Grid>
+                <!--Save Button-->
+                <Button x:Name="SaveButton" Content="{DynamicResource saveAction}" Grid.Row="3" Width="200" VerticalAlignment="Bottom" Background="#FF0D703E" Click="SaveButton_Click"/>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
