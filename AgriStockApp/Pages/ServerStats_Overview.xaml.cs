@@ -90,6 +90,12 @@ namespace AgriStockApp.Pages
             window = Window.GetWindow(this);
             if (window == null) return;
 
+            //If error
+            if (MainWindow.CareerSavegame == "error")
+            {
+                return;
+            }
+
             //Else
             SetData(JsonConvert.DeserializeObject(MainWindow.CareerSavegame));
             SetMinimap();
