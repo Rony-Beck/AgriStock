@@ -1,5 +1,6 @@
 ﻿using AgriStockApp.Properties;
 using AgriStockApp.Scripts;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace AgriStockApp
         public static dynamic VehiclesSavegame { get; set; }
         public static string Current_FS_Host { get; set; }
         public static string Current_FS_Key { get; set; }
+        public static Newtonsoft.Json.Linq.JValue DayTime { get; set; }
 
         //Timer
         public static DispatcherTimer ServerTimer;
@@ -49,6 +51,7 @@ namespace AgriStockApp
             else
             {
                 //Get Server Datas
+                GetServerAPI();
                 RefreshXml();
 
                 //Redirect to a nice page...
@@ -92,18 +95,30 @@ namespace AgriStockApp
             Debug.WriteLine("> ServerTimerTicked!");
             if (Settings.Default.ServerHost != String.Empty && Settings.Default.ServerKey != String.Empty)
             {
-                RefreshXml();
+                GetServerAPI();
+                if (ServerData == "error") { return; }
+                
+                //Need update?
+                if (DayTime != JsonConvert.DeserializeObject(ServerData).server.dayTime)
+                {
+                    DayTime = JsonConvert.DeserializeObject(ServerData).server.dayTime;
+                    RefreshXml();
+                }
             }
         }
 
-        //Refresh Server Datas
-        public static async void RefreshXml()
+        //Get server api
+        public static async void GetServerAPI()
         {
-            Debug.WriteLine(">> Refreshing Server Datas...");
-
             //Get server datas
             ServerData = await Task.Run(() => Fonctions.getServerData(FS_Api.Stats(Settings.Default.ServerHost, Settings.Default.ServerKey)));
             Debug.WriteLine(">>> Server API refreshed...");
+        }
+
+        //Refresh Server Save
+        public static async void RefreshXml()
+        {
+            Debug.WriteLine(">> Refreshing Server Datas...");            
 
             //Get server savegames
             CareerSavegame = await Task.Run(() => Fonctions.getServerData_XML_to_JSON(FS_Api.Career(Settings.Default.ServerHost, Settings.Default.ServerKey)));
