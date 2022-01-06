@@ -77,6 +77,7 @@ namespace AgriStockApp.Pages
             }
 
             //online
+            serverTime.Text = TimeSpan.FromMilliseconds((double)serverData.server.dayTime).ToString(@"hh\:mm");
             serverName.Text = serverData.server.name;
             serverName.Foreground = new SolidColorBrush(Colors.SkyBlue);
             serverPlayers.Text = serverData.slots.used + "/" + serverData.slots.capacity;

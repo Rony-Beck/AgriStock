@@ -22,7 +22,11 @@
         <!--Header-->
         <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Grid.ColumnSpan="3" Margin="0,0,0,10">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock x:Name="serverName" Text="{DynamicResource serverName}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="18" />
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="ProgressClock" Width="18" Height="18" VerticalAlignment="Center" />
+                    <TextBlock x:Name="serverTime" Text="00:00" FontSize="18" Margin="4,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock x:Name="serverName" Text="{DynamicResource serverName}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="18" Margin="20,0,0,0"/>
                 <TextBlock x:Name="serverPlayers" Text="-/-" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="10,0,0,0" />
                 <Button x:Name="serverRefresh" ToolTip="{DynamicResource refresh}" BorderBrush="{x:Null}" Background="#FF088D3F" Padding="4,4,4,4" Margin="10,0,0,0" VerticalAlignment="Center" Height="24" Click="serverRefresh_Click" Cursor="Hand">
                     <materialDesign:PackIcon Kind="Refresh" />
